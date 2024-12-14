@@ -1,1 +1,340 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Account System</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #4e73df;
+    }
+    input[type="text"], input[type="email"], input[type="password"], button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+      outline: none;
+      border-color: #4e73df;
+    }
+    button {
+      background-color: #4e73df;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #3751b3;
+    }
+    a {
+      color: #4e73df;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    #admin-panel {
+      display: none;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    #admin-panel table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #admin-panel th, #admin-panel td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    #admin-panel button {
+      background-color: #e74a3b;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    #admin-panel button:hover {
+      background-color: #c0392b;
+    }
+    #user-dashboard {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    #user-dashboard h2 {
+      font-size: 28px;
+      color: #4e73df;
+    }
+    #user-dashboard button {
+      margin-top: 10px;
+      background-color: #4e73df;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #user-dashboard button:hover {
+      background-color: #3751b3;
+    }
+    #edit-form {
+      display: none;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    #edit-form input[type="text"], #edit-form input[type="email"], #edit-form input[type="password"] {
+      margin-bottom: 15px;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+      border-color: #4e73df;
+      box-shadow: 0 0 5px rgba(78, 115, 223, 0.2);
+    }
+    button:focus {
+      outline: none;
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="login-form" class="container">
+    <h2>Login</h2>
+    <input type="text" id="login-username" placeholder="Username">
+    <input type="password" id="login-password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+  </div>
+  <div id="signup-form" class="container">
+    <h2>Sign Up</h2>
+    <input type="text" id="signup-username" placeholder="Username">
+    <input type="text" id="signup-first-name" placeholder="First Name">
+    <input type="text" id="signup-last-name" placeholder="Last Name">
+    <input type="email" id="signup-email" placeholder="Email">
+    <input type="password" id="signup-password" placeholder="Password">
+    <input type="password" id="signup-confirm-password" placeholder="Confirm Password">
+    <button onclick="signUp()">Sign Up</button>
+    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+  </div>
+  <div id="admin-panel">
+    <h2>Admin Panel</h2>
+    <table id="user-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <div id="user-dashboard">
+    <h2>User Dashboard</h2>
+    <p>Welcome, <span id="user-name"></span></p>
+    <p>Email: <span id="user-email"></span></p>
+    <button onclick="editProfile()">Edit Profile</button>
+    <button onclick="logout()">Logout</button>
+    <button onclick="deleteAccount()">Delete Account</button>
+  </div>
+  <div id="edit-form">
+    <h2>Edit Profile</h2>
+    <input type="text" id="edit-first-name" placeholder="First Name">
+    <input type="text" id="edit-last-name" placeholder="Last Name">
+    <input type="email" id="edit-email" placeholder="Email">
+    <input type="password" id="edit-password" placeholder="Password">
+    <button onclick="saveProfileChanges()">Save Changes</button>
+    <button onclick="cancelEditProfile()">Cancel</button>
+  </div>
+  <script>
+    class User {
+      constructor(username, firstName, lastName, email, password) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.#password = password;
+      }
+      #password;
+      get password() {
+        return this.#password;
+      }
+      set password(newPassword) {
+        this.#password = newPassword;
+      }
+      setPassword(newPassword) {
+        this.password = newPassword;
+      }
+      getUsername() {
+        return this.username;
+      }
+      getEmail() {
+        return this.email;
+      }
+      updateProfile(firstName, lastName, email, password) {
+        if (firstName) this.firstName = firstName;
+        if (lastName) this.lastName = lastName;
+        if (email) this.email = email;
+        if (password) this.password = password;
+      }
+    }
+    let users = [];
+    let loggedInUser = null;
+    const adminUsername = "admin";
+    const adminPassword = "admin123";
+    
+    function showAdminPanel() {
+      const adminPanel = document.getElementById('admin-panel');
+      const userTableBody = document.querySelector('#user-table tbody');
+      adminPanel.style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('user-dashboard').style.display = 'none';
+      userTableBody.innerHTML = '';
+      users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.username}</td>
+          <td>${user.email}</td>
+          <td><button onclick="deleteUser(${index})">Delete</button></td>
+        `;
+        userTableBody.appendChild(row);
+      });
+    }
+    function deleteUser(index) {
+      users.splice(index, 1);
+      showAdminPanel();
+    }
+    function showLogin() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
+    }
+    function showSignUp() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'block';
+    }
+    function login() {
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      if (username === adminUsername && password === adminPassword) {
+        showAdminPanel();
+      } else {
+        const user = users.find(user => user.username === username && user.password === password);
+        if (user) {
+          loggedInUser = user;
+          showUserDashboard(user);
+        } else {
+          alert('Invalid credentials');
+        }
+      }
+    }
+    function signUp() {
+      const username = document.getElementById('signup-username').value;
+      const firstName = document.getElementById('signup-first-name').value;
+      const lastName = document.getElementById('signup-last-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+      if (password === confirmPassword) {
+        const newUser = new User(username, firstName, lastName, email, password);
+        users.push(newUser);
+        alert('Account created');
+        showLogin();
+      } else {
+        alert('Passwords do not match');
+      }
+    }
+    function showUserDashboard(user) {
+      document.getElementById('user-dashboard').style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'none';
+      document.getElementById('edit-form').style.display = 'none';
+      document.getElementById('user-name').textContent = `${user.firstName} ${user.lastName}`;
+      document.getElementById('user-email').textContent = user.email;
+    }
+    function editProfile() {
+      document.getElementById('edit-form').style.display = 'block';
+      document.getElementById('user-dashboard').style.display = 'none';
+      document.getElementById('edit-first-name').value = loggedInUser.firstName;
+      document.getElementById('edit-last-name').value = loggedInUser.lastName;
+      document.getElementById('edit-email').value = loggedInUser.email;
+      document.getElementById('edit-password').value = loggedInUser.password;
+    }
+    function saveProfileChanges() {
+      const newFirstName = document.getElementById('edit-first-name').value;
+      const newLastName = document.getElementById('edit-last-name').value;
+      const newEmail = document.getElementById('edit-email').value;
+      const newPassword = document.getElementById('edit-password').value;
+      loggedInUser.updateProfile(newFirstName, newLastName, newEmail, newPassword);
+      showUserDashboard(loggedInUser);
+    }
+    function cancelEditProfile() {
+      showUserDashboard(loggedInUser);
+    }
+    function logout() {
+      loggedInUser = null;
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('user-dashboard').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'none';
+    }
+    function deleteAccount() {
+      users = users.filter(user => user !== loggedInUser);
+      logout();
+    }
+  </script>
+</body>
+</html>
