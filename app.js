@@ -19,7 +19,7 @@ class User {
   getUsername() {
     return this.username;
   }
-  getEmail() {
+  #getEmail() {
     return this.email;
   }
   updateProfile(firstName, lastName, email, password) {
