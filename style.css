@@ -1,1 +1,140 @@
-
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #4e73df;
+    }
+    input[type="text"], input[type="email"], input[type="password"], button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+      outline: none;
+      border-color: #4e73df;
+    }
+    button {
+      background-color: #4e73df;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #3751b3;
+    }
+    a {
+      color: #4e73df;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    #admin-panel {
+      display: none;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    #admin-panel table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #admin-panel th, #admin-panel td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    #admin-panel button {
+      background-color: #e74a3b;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    #admin-panel button:hover {
+      background-color: #c0392b;
+    }
+    #user-dashboard {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    #user-dashboard h2 {
+      font-size: 28px;
+      color: #4e73df;
+    }
+    #user-dashboard button {
+      margin-top: 10px;
+      background-color: #4e73df;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #user-dashboard button:hover {
+      background-color: #3751b3;
+    }
+    #edit-form {
+      display: none;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    #edit-form input[type="text"], #edit-form input[type="email"], #edit-form input[type="password"] {
+      margin-bottom: 15px;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+      border-color: #4e73df;
+      box-shadow: 0 0 5px rgba(78, 115, 223, 0.2);
+    }
+    button:focus {
+      outline: none;
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
