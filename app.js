@@ -19,8 +19,11 @@ class User {
   getUsername() {
     return this.username;
   }
-  #getEmail() {
+  getEmail() {
     return this.email;
+  }
+  #getName() {
+    return this.name;
   }
   updateProfile(firstName, lastName, email, password) {
     if (firstName) this.firstName = firstName;
