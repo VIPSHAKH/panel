@@ -255,7 +255,7 @@
   
     let users = [];
     let have_user = null;
-    const admin = new Admin('admin', 'Admin', 'Adminov', 'admin@example.com', 'admin');
+    const admin = new Admin('admin', 'Admin', 'Admin', 'admin@e.com', 'admin');
   
     function showAdminPanel() {
       const adminPanel = document.getElementById('admin-panel');
@@ -281,6 +281,7 @@
       const usernameToDelete = users[index].username;
       admin.deleteUser(users, usernameToDelete);
       showAdminPanel();
+      console.log(users)
     }
   
     function showLogin() {
@@ -380,6 +381,7 @@
     function deleteAccount() {
       users = users.filter(user => user !== have_user);
       logout();
+      console.log(users)
     }
   </script>
   
