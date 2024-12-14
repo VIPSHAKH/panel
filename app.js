@@ -130,6 +130,7 @@ function signUp() {
     users.push(newUser);
     alert('Hisob yaratildi');
     showLogin();
+    console.log(users)
   } else {
     alert('Parol mos kelmadi');
   }
@@ -152,6 +153,7 @@ function editProfile() {
   document.getElementById('edit-last-name').value = have_user.lastName;
   document.getElementById('edit-email').value = have_user.email;
   document.getElementById('edit-password').value = have_user.password;
+  
 }
 
 function saveProfileChanges() {
@@ -161,6 +163,7 @@ function saveProfileChanges() {
   const newPassword = document.getElementById('edit-password').value;
   have_user.updateProfile(newFirstName, newLastName, newEmail, newPassword);
   showUserDashboard(have_user);
+  console.log(users)
 }
 
 function cancelEditProfile() {
